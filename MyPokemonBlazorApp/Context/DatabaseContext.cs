@@ -16,7 +16,7 @@ namespace MyPokemonBlazorApp.Context
             var path = Environment.GetFolderPath(folder);
             var dbpath = Path.Join(path, "pokemon.db");
             optionsBuilder.UseSqlite($"Data Source={dbpath}");
-
+            // tarvi boss test
         }
 
     }
