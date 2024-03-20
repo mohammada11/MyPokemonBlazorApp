@@ -11,13 +11,28 @@
     
     <div class="card">
         <div class="card-body bg-light"> </div>
-        <h3> @pokemon?.Name </h3>
-        
-        <p>HP: @pokemon?.HP</p>
-        <p>Attack: @pokemon?.Attack</p>
-        <p>Defence: @pokemon?.Defence</p>
-        <p>Speed: @pokemon?.Speed</p>
-        <p>Total: @pokemon?.Total</p>
+        <h1> @pokemon?.Name </h1>
+
+        <h5> <span class="badge rounded-pill text-bg-primary">@pokemon?.Type</span> <span class="badge rounded-pill text-bg-success"> Generation @pokemon?.Generation</span> </h5> 
+
+        <p>
+           
+        <p> HP:   
+            
+            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="@pokemon.HP" aria-valuemin="0" aria-valuemax="255">
+                <div class="progress-bar" style="width: @(pokemon.HP*100/255)% "> @pokemon?.HP% </div>
+            </div>
+        </p>
+        </p>
+
+        <p>   Attack: <div class="progress" role="progressbar" aria-label="danger" aria-valuenow="@pokemon.Attack" aria-valuemin="0" aria-valuemax="255">
+                <div class="progress-bar bg-danger" style="width: @(pokemon.Attack*100/255)% "> @pokemon?.Attack% </div>
+            </div> 
+        </p>
+
+        <p> Defence: @pokemon?.Defence</p>
+        <p> Speed: @pokemon?.Speed</p>
+        <p> Total: @pokemon?.Total</p>
 
     </div>
      
