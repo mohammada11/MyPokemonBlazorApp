@@ -1,50 +1,68 @@
 ﻿@page "/Info/{id:int}"
 @inject DatabaseContext DbContext
+@inject PokemonImageGrabber PokemonImageGrabber
 
 
 <h3>Info</h3>
 
 @if (pokemon is not null)
 {
-
-   
-    
     <div class="card">
         <div class="card-body bg-light"> </div>
         <h1> @pokemon?.Name </h1>
 
-        <h5> <span class="badge rounded-pill text-bg-primary">@pokemon?.Type</span> <span class="badge rounded-pill text-bg-success"> Generation @pokemon?.Generation</span> </h5> 
+        <h5> <span class="badge rounded-pill text-bg-primary">@pokemon?.Type</span> <span class="badge rounded-pill text-bg-success"> Generation @pokemon?.Generation</span> </h5>
 
-        <p>
-           
-        <p> HP:   
-            
-            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="@pokemon.HP" aria-valuemin="0" aria-valuemax="255">
-                <div class="progress-bar" style="width: @(pokemon.HP*100/255)% "> @pokemon?.HP% </div>
+        <div class="col-md-3 me-1">
+            <img src="@imageUrl" onerror="this.onerror=null;this.src='/img/notfound.png';" class="img-fluid img-thumbnail rounded-start" alt="@pokemon.Name" />
+        </div>      
+        <div class="row gb-2 md-1">
+            <div class="col-md-2">HP:</div>
+            <div class="col-md9">
+                <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="@pokemon.HP" aria-valuemin="0" aria-valuemax="255" style="height:30px">
+                    <div class="progress-bar" style="width: @(pokemon.HP*100/255)% ">@pokemon?.HP</div>
+                </div>
             </div>
-        </p>
-        </p>
+        </div>
 
-        <p>   Attack: <div class="progress" role="progressbar" aria-label="danger" aria-valuenow="@pokemon.Attack" aria-valuemin="0" aria-valuemax="255">
-                <div class="progress-bar bg-danger" style="width: @(pokemon.Attack*100/255)% "> @pokemon?.Attack% </div>
-            </div> 
-        </p>
+        <div class="row gb-2 md-1">
+            <div class="col-md-2">Attack:</div>
+            <div class="col-md9">
+                <div class="progress" role="progressbar" aria-label="danger" aria-valuenow="@pokemon.Attack" aria-valuemin="0" aria-valuemax="255" style="height:30px">
+                    <div class="progress-bar bg-danger" style="width: @(pokemon.Attack*100/255)% "> @pokemon?.Attack% </div>
+                </div>
+            </div>
+        </div>
 
-        <p> Defence: @pokemon?.Defence</p>
-        <p> Speed: @pokemon?.Speed</p>
-        <p> Total: @pokemon?.Total</p>
+        <div class="row gb-2 md-1">
+            <div class="col-md-2">Defence:</div>
+            <div class="col-md9">
+                <div class="progress" role="progressbar" aria-label="danger" aria-valuenow="@pokemon.Defence" aria-valuemin="0" aria-valuemax="255" style="height:30px">
+                    <div class="progress-bar bg-success" style="width: @(pokemon.Defence*100/255)% "> @pokemon?.Defence% </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row gb-2 md-1">
+            <div class="col-md-2">Speed:</div>
+            <div class="col-md9">
+                <div class="progress" role="progressbar" aria-label="danger" aria-valuenow="@pokemon.Speed" aria-valuemin="0" aria-valuemax="255" style="height:30px">
+                    <div class="progress-bar bg-warning" style="width: @(pokemon.Speed*100/255)% "> @pokemon?.Speed% </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row gb-2 md-1">
+            <div class="col-md-2">Total:</div>
+            <div class="col-md9">
+                <div class="progress" role="progressbar" aria-label="danger" aria-valuenow="@pokemon.Total" aria-valuemin="0" aria-valuemax="255" style="height:30px">
+                    <div class="progress-bar bg-info" style="width: @(pokemon.Total*100/800)% "> @pokemon?.Total% </div>
+                </div>
+            </div>
+        </div>
+        
 
     </div>
-     
-        
-    
-
-
-     
-
-
-
-
 
     
 }
@@ -58,9 +76,11 @@ else
     public int Id { get; set; }
 
     private Pokemon? pokemon;
+    private string imageUrl { get; set; }
 
     protected override void OnInitialized()
     {
         pokemon = DbContext.Pokemons.SingleOrDefault(p => p.Id == Id);
+        imageUrl = PokemonImageGrabber.GetImageUrl(pokemon);
     }
 }
