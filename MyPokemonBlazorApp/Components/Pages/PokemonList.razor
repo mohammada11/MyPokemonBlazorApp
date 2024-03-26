@@ -23,7 +23,8 @@
         <EditForm OnValidSubmit="Submit" EditContext="editContext">
             <DataAnnotationsValidator />
 
-                <div class="row g-3">
+               <div class="row g-3"> 
+                <div class="col-md-3">
                   <label for="name" class="form-label">Name</label>
                   <InputText class="form-control" placeholder="Name" @bind-Value="model.Name" />
                   <ValidationMessage For="@(() => model.Name)" />
@@ -71,12 +72,12 @@
                 </div>
 
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary float-end"> AddPokemon </button>
-                @(model.Id == 0 ? "Add Pokemon" : "Edit Pokemon")
+                    <button type="submit" class="btn btn-primary float-end"> 
+                @(model.Id == 0 ? "Add Pokemon" : "Edit Pokemon") 
+                </button>
                 </div>
-                
-
-              </EditForm>
+              </div>    
+          </EditForm>
     </div>
         
     
@@ -171,9 +172,6 @@
         await DbContext.SaveChangesAsync();
         await Refresh();
 
-
-        
-
     }
 
     protected override async Task OnInitializedAsync()
@@ -197,4 +195,5 @@
         await DbContext.SaveChangesAsync();
         await Refresh();
     }
+
 }
