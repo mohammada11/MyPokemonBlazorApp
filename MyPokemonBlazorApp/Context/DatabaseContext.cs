@@ -7,7 +7,7 @@ namespace MyPokemonBlazorApp.Context
     public class DatabaseContext : DbContext
     {
         public DbSet<Pokemon> Pokemons { get; set; }
-        public DbSet<Trainer> Trainers { get; set; }
+        public DbSet<Trainer> Trainer { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,7 +16,7 @@ namespace MyPokemonBlazorApp.Context
             var path = Environment.GetFolderPath(folder);
             var dbpath = Path.Join(path, "pokemon.db");
             optionsBuilder.UseSqlite($"Data Source={dbpath}");
-            // tarvi boss test
+            
         }
 
     }
